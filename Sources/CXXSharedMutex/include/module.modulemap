@@ -1,0 +1,5 @@
+module CXXSharedMutex {
+	requires cplusplus20
+	header "CXXSharedMutex/SharedMutex.hpp"
+	export *
+}
