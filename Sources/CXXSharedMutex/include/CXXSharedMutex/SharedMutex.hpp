@@ -26,6 +26,9 @@ class __attribute__((capability("mutex"))) __attribute__((shared_capability("mut
     SharedMutex(const SharedMutex&) = delete;
     SharedMutex& operator=(const SharedMutex&) = delete;
 
+    SharedMutex(SharedMutex&&) = delete;
+    SharedMutex& operator=(SharedMutex&&) = delete;
+
     ~SharedMutex() noexcept = default;
 
     /// Acquires shared ownership of the mutex, blocking if the mutex is not available.
