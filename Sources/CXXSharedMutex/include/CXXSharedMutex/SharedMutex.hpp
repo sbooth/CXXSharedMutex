@@ -46,8 +46,9 @@ class __attribute__((capability("mutex"))) __attribute__((shared_capability("mut
             }
             // Fast path: try to increment the reader count
             if (state_.compare_exchange_weak(previous_state, previous_state + 1, std::memory_order_acquire,
-                                             std::memory_order_relaxed))
+                                             std::memory_order_relaxed)) {
                 return;
+            }
             // CAS failure means another thread changed the state; loop again to recheck
         }
     }
@@ -57,8 +58,9 @@ class __attribute__((capability("mutex"))) __attribute__((shared_capability("mut
         // Read the current state
         auto previous_state = state_.load(std::memory_order_relaxed);
         // Fail if a writer is active
-        if (previous_state < 0)
+        if (previous_state < 0) {
             return false;
+        }
         // Try to increment the reader count; failure means another thread changed the state
         return state_.compare_exchange_weak(previous_state, previous_state + 1, std::memory_order_acquire,
                                             std::memory_order_relaxed);
@@ -70,9 +72,10 @@ class __attribute__((capability("mutex"))) __attribute__((shared_capability("mut
         assert(state_.load(std::memory_order_relaxed) >= 1);
 #endif
         // Decrement the reader count
-        if (const auto previous_state = state_.fetch_sub(1, std::memory_order_release); previous_state == 1)
+        if (const auto previous_state = state_.fetch_sub(1, std::memory_order_release); previous_state == 1) {
             // If the last reader exited wake any waiting readers or writers
             state_.notify_all();
+        }
     }
 
     /// Acquires exclusive ownership of the mutex, blocking if the mutex is not available.
