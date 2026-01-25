@@ -7,9 +7,9 @@
 
 #pragma once
 
-#import <atomic>
-#import <cassert>
-#import <cstdint>
+#include <atomic>
+#include <cassert>
+#include <cstdint>
 
 namespace CXXSharedMutex {
 
