@@ -9,34 +9,31 @@
 import PackageDescription
 
 let package = Package(
-	name: "CXXSharedMutex",
-	products: [
-		// Products define the executables and libraries a package produces, making them visible to other packages.
-		.library(
-			name: "CXXSharedMutex",
-			targets: [
-				"CXXSharedMutex",
-			]
-		),
-	],
-	targets: [
-		// Targets are the basic building blocks of a package, defining a module or a test suite.
-		// Targets can depend on other targets in this package and products from dependencies.
-		.target(
-			name: "CXXSharedMutex",
-			cSettings: [
-				.headerSearchPath("include/CXXSharedMutex"),
-			]
-		),
-		.testTarget(
-			name: "CXXSharedMutexTests",
-			dependencies: [
-				"CXXSharedMutex",
-			],
-			swiftSettings: [
-				.interoperabilityMode(.Cxx),
-			]
-		),
-	],
-	cxxLanguageStandard: .cxx20
+    name: "CXXSharedMutex",
+    products: [
+        // Products define the executables and libraries a package produces, making them visible to other packages.
+        .library(
+            name: "CXXSharedMutex",
+            targets: [
+                "CXXSharedMutex",
+            ]
+        ),
+    ],
+    targets: [
+        // Targets are the basic building blocks of a package, defining a module or a test suite.
+        // Targets can depend on other targets in this package and products from dependencies.
+        .target(
+            name: "CXXSharedMutex"
+        ),
+        .testTarget(
+            name: "CXXSharedMutexTests",
+            dependencies: [
+                "CXXSharedMutex",
+            ],
+            swiftSettings: [
+                .interoperabilityMode(.Cxx),
+            ]
+        ),
+    ],
+    cxxLanguageStandard: .cxx20
 )
