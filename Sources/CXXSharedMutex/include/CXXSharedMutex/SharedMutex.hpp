@@ -23,10 +23,10 @@ class __attribute__((capability("mutex"))) __attribute__((shared_capability("mut
   public:
     SharedMutex() noexcept = default;
 
-    SharedMutex(const SharedMutex&) = delete;
+    SharedMutex(const SharedMutex&)            = delete;
     SharedMutex& operator=(const SharedMutex&) = delete;
 
-    SharedMutex(SharedMutex&&) = delete;
+    SharedMutex(SharedMutex&&)            = delete;
     SharedMutex& operator=(SharedMutex&&) = delete;
 
     ~SharedMutex() noexcept = default;
